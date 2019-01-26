@@ -9,11 +9,12 @@
             "command": "gcc",
             "args": [
                 "-Wall",
-                "0_test.c",
+                "${file}",
                 "-o",
                 "main.exe"
             ],
-            "group": "build"
+            "group": "build",
+            "problemMatcher": []
         },
         {
             "label": "Comiple Debug",
@@ -22,7 +23,7 @@
             "args": [
                 "-g",
                 "-Wall",
-                "0_test.c",
+                "${file}",
                 "-o",
                 "main.exe"
             ],
