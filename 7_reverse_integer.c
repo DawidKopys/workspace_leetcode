@@ -33,14 +33,34 @@ int reverse(int x)
 }
 
 int reverse2(int x) {
-  long int val = 0;
+  long long int val = 0;
+  
 	do 
 	{
 		val = val * 10 + x % 10;
 		x /= 10;
 	} while (x);
-	
-	return (val > INT_MAX || val < INT_MIN) ? (int)0 : (int)val;
+
+  if (val > INT_MAX || val < INT_MIN)
+    val = 0;
+
+	return val;
+}
+
+int reverse3(int x)
+{
+  int pop, ret = 0;
+
+  while (x != 0)
+  {
+    pop = x % 10;
+    x /= 10;
+    if (ret > INT_MAX/10 || (ret == INT_MAX/10 && pop > 7)) return 0;
+    if (ret < INT_MIN/10 || (ret == INT_MIN/10 && pop < -8)) return 0;
+    ret = ret * 10 + pop;
+  }
+  
+  return ret;
 }
 
 int main(int argc, char const *argv[])
@@ -50,6 +70,7 @@ int main(int argc, char const *argv[])
   int a = reverse2((int)2147483647);
   printf("%d\n", a);
 
-  printf("%d\n", (int)pow_my(2,3));
+  printf("%d\n", reverse3((int)213123));
+
   return 0;
 }
