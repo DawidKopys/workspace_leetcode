@@ -6,34 +6,27 @@
 
 bool isLetterPresent(char c, bool letters_arr[])
 {
-  int letterIntex = tolower(c) - 97;
-
-  if (letters_arr == NULL)
+  if (letters_arr == NULL || (int)c > 255)
     return false;
 
-  return letters_arr[letterIntex];
+  return letters_arr[(int)c];
 }
 
 void updatePresentLetters(char c, bool letters_arr[])
 {
-  int letterIntex = tolower(c) - 97;
-
-  if (letters_arr == NULL)
+  if (letters_arr == NULL || (int)c > 255)
     return;
 
-  letters_arr[letterIntex] = true;
+  letters_arr[(int)c] = true;
 }
 
 int lengthOfLongestSubstring(char *s)
 {
-  bool letters_in_substring[26] = {false};  // there are 26 letters in the english alphabhet
+  bool letters_in_substring[256] = {false};  // all characters from Extended ASCII
   int ret_length  = 0;
   char* start_p   = s;
   int count       = 0;
   bool isLetterPresent_flag = false;
-
-  int input_length = strlen(s);
-  // printf("Input length: %d\n", input_length);
 
   while ((*s != '\0') && (*start_p != '\0'))
   {
@@ -57,6 +50,10 @@ int lengthOfLongestSubstring(char *s)
       s++;
     }
   }
+  if (count > ret_length)
+  {
+    ret_length = count;
+  }
 
   return ret_length;
 }
@@ -64,7 +61,7 @@ int lengthOfLongestSubstring(char *s)
 int main(int argc, char const *argv[])
 {
   int length;
-  char *input = "abcadcbb";
+  char *input = " ";
 
   length = lengthOfLongestSubstring(input);
 
