@@ -2,6 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+void swap(int *a, int *b) {
+  int tmp;
+  tmp = *a;
+  *a = *b;
+  *b = tmp;
+}
+
 /**
  * Return an array of arrays of size *returnSize.
  * Note: The returned array must be malloced, assume caller calls free().
@@ -22,6 +29,12 @@ int** threeSum(int* nums, int numsSize, int* returnSize) {
           arr[0] = *i;
           arr[1] = *j;
           arr[2] = *u;
+
+          /* order the number in the array - from the smallest to the biggest */
+          if (arr[0] > arr[2]) swap(arr+0, arr+2);
+          if (arr[0] > arr[1]) swap(arr+0, arr+1);
+          if (arr[1] > arr[2]) swap(arr+1, arr+2);
+
           ret[ind++] = arr;
         }
       }
